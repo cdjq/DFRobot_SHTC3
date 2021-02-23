@@ -52,14 +52,16 @@ public:
    * @param  mode  The operating mode of the sensor
    * @return Whether the device is on or not. return true succeed ;return false failed.
    */
+   
   bool begin(uint8_t mode = workingModeOne);
-
+  
   /**
    * @brief  Obtain temperature and humidity data
    * @param  data  An array of temperature and humidity
    * @return Is the data obtained correct? return true  The data is correct ; return false  The data  is incorrect
    */
   bool getTandRHData(float data[]);
+  
 private:
   /**
    * @brief  software reset
@@ -70,6 +72,11 @@ private:
    * @brief  wakeup
    */
   void wakeup();
+  
+  /**
+   * @brief  device sleep
+   */
+  void sleep();
 
   /**
    * @brief  set the operating mode of the sensor
@@ -84,6 +91,7 @@ private:
    * @return Is the data obtained correct? return true  The data is correct ; return false  The data  is incorrect
    */
   bool getTandRHRawData(uint16_t* temp,uint16_t* rh);
+  
   /**
    * @brief  check sensor id
    * @return id correct return true ,id incorrect return false

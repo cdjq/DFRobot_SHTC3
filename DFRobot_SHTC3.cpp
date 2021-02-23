@@ -38,6 +38,11 @@ void DFRobot_SHTC3::wakeup()
   writeCommand(COMMAND_WAKEUP);
   delayMicroseconds(230);
 }
+void DFRobot_SHTC3::sleep()
+{
+  writeCommand(COMMAND_SLEEP);
+  delayMicroseconds(230);
+}
 void DFRobot_SHTC3::setMode(uint8_t mode){
   if((mode>workingModeTwo)||(mode == 0)){
     _mode = workingModeOne;

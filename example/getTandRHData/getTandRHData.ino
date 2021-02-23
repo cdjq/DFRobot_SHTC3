@@ -14,6 +14,7 @@ DFRobot_SHTC3 SHTC3;
 float data[2]={0,0};
 void setup() {
   Serial.begin(115200);
+
   /**
    * mode:
    *  workingModeOne                    Clock Stretching Enabled and Read Temperature First
