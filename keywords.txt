@@ -17,6 +17,7 @@ getTandRHData	KEYWORD2
 #######################################
 # Constants   (LITERAL1)
 #######################################
-workingModeOne	LITERAL1
-workingModeTwo	LITERAL1
-
+enableClkStretch	LITERAL1
+disableClkStretch	LITERAL1
+temperature	LITERAL1
+humidity	LITERAL1

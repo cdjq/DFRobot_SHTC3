@@ -33,9 +33,11 @@
 class DFRobot_SHTC3{
 public:
   typedef enum{
-    workingModeOne =1,
-    workingModeTwo,
+    enableClkStretch =1,
+    disableClkStretch,
   }eWorkingMode;
+  float temperature;
+  float humidity;
 public:
   /**
    * @brief  constructed function
@@ -53,20 +55,7 @@ public:
    * @return Whether the device is on or not. return true succeed ;return false failed.
    */
    
-  bool begin(uint8_t mode = workingModeOne);
-  
-  /**
-   * @brief  Obtain temperature and humidity data
-   * @param  data  An array of temperature and humidity
-   * @return Is the data obtained correct? return true  The data is correct ; return false  The data  is incorrect
-   */
-  bool getTandRHData(float data[]);
-  
-private:
-  /**
-   * @brief  software reset
-   */
-  void softwareReset();
+  bool begin(uint8_t mode = enableClkStretch);
   
   /**
    * @brief  wakeup
@@ -77,6 +66,21 @@ private:
    * @brief  device sleep
    */
   void sleep();
+  
+  /**
+   * @brief  Obtain temperature and humidity data
+   * @param  data  An array of temperature and humidity
+   * @return Is the data obtained correct? return true  The data is correct ; return false  The data  is incorrect
+   */
+  bool getTandRHData();
+  
+private:
+  /**
+   * @brief  software reset
+   */
+  void softwareReset();
+  
+
 
   /**
    * @brief  set the operating mode of the sensor

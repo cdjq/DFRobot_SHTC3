@@ -15,6 +15,8 @@ DFRobot_SHTC3::DFRobot_SHTC3(TwoWire *pWire):
 _pWire(pWire),_deviceAddr(SHTC3_IIC_ADDR)
 {
   _mode = 0;
+  temperature = 0;
+  humidity = 0;
 }
 bool DFRobot_SHTC3::begin(uint8_t mode)
 {
@@ -26,6 +28,7 @@ bool DFRobot_SHTC3::begin(uint8_t mode)
   if(!checkDeviceID()){
     return false; 
   }
+  sleep();
   return true;
 }
 void DFRobot_SHTC3::softwareReset()
@@ -44,18 +47,18 @@ void DFRobot_SHTC3::sleep()
   delayMicroseconds(230);
 }
 void DFRobot_SHTC3::setMode(uint8_t mode){
-  if((mode>workingModeTwo)||(mode == 0)){
-    _mode = workingModeOne;
+  if((mode>disableClkStretch)||(mode == 0)){
+    _mode = enableClkStretch;
   }else{
     _mode = mode;
   }
 }
-bool DFRobot_SHTC3::getTandRHData(float data[])
+bool DFRobot_SHTC3::getTandRHData()
 {
   uint16_t temp,RH;
   if(getTandRHRawData(&temp,&RH)){
-    data[0] = (((float)temp*175.0)/65536.0)-45.0;
-    data[1] = ((float)RH*100.0)/65536.0;
+    temperature = (((float)temp*175.0)/65536.0)-45.0;
+    humidity = ((float)RH*100.0)/65536.0;
     return true;
   }
   return false;
@@ -78,7 +81,7 @@ bool DFRobot_SHTC3::getTandRHRawData(uint16_t* temp,uint16_t* rh)
   uint8_t data[6];
   uint16_t command;
   switch(_mode){
-  case workingModeOne:
+  case enableClkStretch:
     command = COMMAND_MEAS_T_RH_EN_CLOCKSTR;
     readValue(command,6,data); 
     if(checkCrc(data[0],data[1],data[2]) && checkCrc(data[3],data[4],data[5])){
@@ -87,7 +90,7 @@ bool DFRobot_SHTC3::getTandRHRawData(uint16_t* temp,uint16_t* rh)
       return true;
     }
     break;
-  case workingModeTwo:
+  case disableClkStretch:
     command = COMMAND_MEAS_T_RH_DIS_CLOCKSTR;
     readValue(command,6,data);
     if(checkCrc(data[0],data[1],data[2]) && checkCrc(data[3],data[4],data[5])){
