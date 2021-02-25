@@ -1,5 +1,5 @@
 /*!
- * @file getTandRHData.ino
+ * @file measureTemperatureAndHumidity.ino
  * @brief Measurement of temperature and humidity
  * @copyright  Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
  * @licence     The MIT License (MIT)
