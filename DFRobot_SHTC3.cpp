@@ -39,7 +39,7 @@ void DFRobot_SHTC3::softwareReset()
 void DFRobot_SHTC3::wakeup()
 {
   writeCommand(COMMAND_WAKEUP);
-  delayMicroseconds(230);
+  delayMicroseconds(500);
 }
 void DFRobot_SHTC3::sleep()
 {
@@ -115,7 +115,7 @@ void DFRobot_SHTC3::readValue(uint16_t command,uint8_t readnum,uint8_t *readArra
   _pWire->write(command>>8);
   _pWire->write(command&0xFF);
   _pWire->endTransmission();
-  delayMicroseconds(11000);
+  delayMicroseconds(12000);
   if(_pWire->requestFrom(_deviceAddr,readnum)==readnum){
     for(uint8_t i = 0; i < readnum; i++){
       readArray[i] = _pWire->read();
