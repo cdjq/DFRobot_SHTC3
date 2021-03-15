@@ -2,9 +2,7 @@
 
 The SHTC3 is a digital humidity and temperature sensor designed especially for high-volume consumer electronics applications.
 
-The sensor covers a humidity measurement range of 0 to 100 %RH and a temperature measurement range of - 40 °C to 125 °C with a typical accuracy of ±2 %RH and ±0.2°C.
-
-![](D:\Arduino\libraries\DFRobot_SHTC3\resources\images\SEN0427svg1.png)
+The sensor covers a humidity measurement range of 0 to 100 %RH and a temperature measurement range of - 40 °C to 125 °C with a typical accuracy of ±2 %RH and ±0.2°C.![](D:\Arduino\libraries\DFRobot_SHTC3\resources\images\SEN0427svg1.png)
 
 ## 产品链接（https://www.dfrobot.com/）
     SKU：SEN0414
