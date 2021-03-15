@@ -53,12 +53,16 @@ public:
    * @brief  Destructor
    */
   ~DFRobot_SHTC3(){};
+  
   /**
    * @brief  Initialization function
    * @param  mode  The operating mode of the sensor
+   *               enableClkStretch                     Clock Stretching Enabled
+   *               disableClkStretch                    Clock Stretching Disabled
+   *               enableClkStretchLowPower             Clock Stretching Enabled & Low Power
+   *               disableClkStretchLowPower            Clock Stretching Disabled & Low Power
    * @return Whether the device is on or not. return true succeed ;return false failed.
    */
-   
   bool begin(uint8_t mode = enableClkStretch);
   
   /**
@@ -73,7 +77,6 @@ public:
   
   /**
    * @brief  Obtain temperature and humidity data
-   * @param  data  An array of temperature and humidity
    * @return Is the data obtained correct? return true  The data is correct ; return false  The data  is incorrect
    */
   bool getTandRHData();
