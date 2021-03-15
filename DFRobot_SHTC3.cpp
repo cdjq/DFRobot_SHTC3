@@ -47,7 +47,7 @@ void DFRobot_SHTC3::sleep()
   delayMicroseconds(230);
 }
 void DFRobot_SHTC3::setMode(uint8_t mode){
-  if((mode>disableClkStretch)||(mode == 0)){
+  if((mode > disableClkStretchLowPower) || (mode == 0)){
     _mode = enableClkStretch;
   }else{
     _mode = mode;
@@ -57,8 +57,8 @@ bool DFRobot_SHTC3::getTandRHData()
 {
   uint16_t temp,RH;
   if(getTandRHRawData(&temp,&RH)){
-    temperature = (((float)temp*175.0)/65536.0)-45.0;
-    humidity = ((float)RH*100.0)/65536.0;
+    temperature = (((float)temp * 175.0)/ 65536.0 ) - 45.0;
+    humidity = ((float)RH * 100.0) / 65536.0;
     return true;
   }
   return false;
@@ -69,7 +69,7 @@ bool DFRobot_SHTC3::checkDeviceID()
   uint16_t id =0;
   readValue(COMMAND_DEVICE_ID,3,idArray);
   if(checkCrc(idArray[0],idArray[1],idArray[2])){
-    id = (idArray[0]<<8)|idArray[1];
+    id = (idArray[0] << 8)|idArray[1];
     if((id&0x807) == 0x807){
       return true;
     }
@@ -83,22 +83,25 @@ bool DFRobot_SHTC3::getTandRHRawData(uint16_t* temp,uint16_t* rh)
   switch(_mode){
   case enableClkStretch:
     command = COMMAND_MEAS_T_RH_EN_CLOCKSTR;
-    readValue(command,6,data); 
-    if(checkCrc(data[0],data[1],data[2]) && checkCrc(data[3],data[4],data[5])){
-      *temp = (data[0]<<8)|data[1];
-      *rh = (data[3]<<8)|data[4];
-      return true;
-    }
     break;
   case disableClkStretch:
     command = COMMAND_MEAS_T_RH_DIS_CLOCKSTR;
-    readValue(command,6,data);
-    if(checkCrc(data[0],data[1],data[2]) && checkCrc(data[3],data[4],data[5])){
-      *temp = (data[0]<<8)|data[1];
-      *rh = (data[3]<<8)|data[4];
-      return true;
-    }
     break;
+  case enableClkStretchLowPower:
+    command = COMMAND_MEAS_T_RH_EN_CLOCKSTR_LOW_POWER;
+    break;
+  case disableClkStretchLowPower:
+    command = COMMAND_MEAS_T_RH_DIS_CLOCKSTR_LOW_POWER;
+    break;
+  default :
+    command = COMMAND_MEAS_T_RH_EN_CLOCKSTR;
+    break;
+  }
+  readValue(command,6,data);
+  if(checkCrc(data[0],data[1],data[2]) && checkCrc(data[3],data[4],data[5])){
+    *temp = (data[0]<<8)|data[1];
+    *rh = (data[3]<<8)|data[4];
+    return true;
   }
   return false;
 }

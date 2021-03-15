@@ -24,6 +24,8 @@
 
 #define COMMAND_MEAS_T_RH_EN_CLOCKSTR              0x7CA2
 #define COMMAND_MEAS_T_RH_DIS_CLOCKSTR             0x7866
+#define COMMAND_MEAS_T_RH_EN_CLOCKSTR_LOW_POWER    0x6458
+#define COMMAND_MEAS_T_RH_DIS_CLOCKSTR_LOW_POWER   0x609C
 
 #define COMMAND_SOFTWARE_RESET                     0x805D
 #define COMMAND_DEVICE_ID                          0xEFC8
@@ -35,6 +37,8 @@ public:
   typedef enum{
     enableClkStretch =1,
     disableClkStretch,
+    enableClkStretchLowPower,
+    disableClkStretchLowPower,
   }eWorkingMode;
   float temperature;
   float humidity;

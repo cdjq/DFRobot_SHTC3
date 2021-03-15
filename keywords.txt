@@ -19,5 +19,7 @@ getTandRHData	KEYWORD2
 #######################################
 enableClkStretch	LITERAL1
 disableClkStretch	LITERAL1
+enableClkStretchLowPower	LITERAL1
+disableClkStretchLowPower	LITERAL1
 temperature	LITERAL1
 humidity	LITERAL1
